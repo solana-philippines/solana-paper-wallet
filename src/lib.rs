@@ -1,3 +1,7 @@
+mod entrypoint;
+mod instruction;
+mod error;
+
 #[cfg(test)]
 mod tests {
     #[test]
