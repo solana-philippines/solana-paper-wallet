@@ -1,6 +1,7 @@
 mod entrypoint;
 mod instruction;
 mod error;
+mod state;
 
 #[cfg(test)]
 mod tests {
