@@ -20,6 +20,10 @@ pub enum Instruction {
     Store {
         code: String
     },
+    Balance {
+        code: String,
+        hash: Pubkey
+    },
     Redeem {
         code: String,
         hash: Pubkey
