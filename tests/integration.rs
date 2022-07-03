@@ -147,14 +147,14 @@ fn test_redeem_sol() {
 
     instruction_data.append(&mut payload);
 
-    let (pda, bump_seed) = Pubkey::find_program_address(&[payload_struct.code.as_bytes(), payer.pubkey().as_ref()], &program_id);
+    let hash = payer;
+    let (pda, bump_seed) = Pubkey::find_program_address(&[payload_struct.code.as_bytes(), hash.pubkey().as_ref()], &program_id);
 
     let account_data = vec![
       AccountMeta::new(user2.pubkey(), true),
       AccountMeta::new(pda, false),
       AccountMeta::new(system_program::ID, false),
     ];
-
 
     let mut transaction = Transaction::new_with_payer(
         &[

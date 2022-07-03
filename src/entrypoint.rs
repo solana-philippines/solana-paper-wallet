@@ -1,14 +1,10 @@
 
 /*
- * 
+ *  What happens if I empty out the account from lamports?
  *
  *  What happens when I transfer all from an account will it close and zero out the data?
  *
- *
- *
  */
-
-
 use solana_program::{
     msg,
     entrypoint,
@@ -47,8 +43,12 @@ pub fn process_instruction(
             // Compute pda
             let (pda, bump_seed) = Pubkey::find_program_address(&[code.as_bytes(), initializer.key.as_ref()], program_id);
 
+            msg!("initializer as_ref {:?}", initializer.key.as_ref());
+            msg!("user_account: {}", user_account.key);
+            msg!("pda: {}", pda);
+
             if user_account.key != &pda {
-              return Err(ProgramError::InvalidInstructionData);
+              return Err(ProgramError::InvalidAccountData);
             }
 
             // Compute rent
@@ -84,20 +84,27 @@ pub fn process_instruction(
             msg!("store bump_seed: {:?}", test.bump_seed);
         },
 
+
         Instruction::Redeem { code, hash } => {
             let initializer = next_account_info(account_info_iter).expect("Failed next_account_info initializer");
             let user_account = next_account_info(account_info_iter)?;
-            let system_program = next_account_info(account_info_iter)?;
+
+            // let system_program = next_account_info(account_info_iter)?;
 
             // Compute pda with code and hash (if they don't generate 
             // the right pda transfer of lampports wont happen
-            let (pda, bump_seed) = Pubkey::find_program_address(&[code.as_bytes(), hash.as_ref()], program_id);
+            let (pda, bump_seed) =
+                Pubkey::find_program_address(
+                    &[code.as_bytes(), hash.as_ref()],
+                    program_id
+                );
 
             if *user_account.key != pda {
                 return Err(ProgramError::InvalidAccountData);
             }
 
             msg!("user 2 before {}", initializer.lamports());
+
             transfer_lamports(user_account, initializer, user_account.lamports())?;
             msg!("user 2 after {}", initializer.lamports());
 
