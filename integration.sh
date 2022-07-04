@@ -7,7 +7,7 @@ cargo build-bpf
 # cargo test test_validator_transaction
 
 # Specific test with println!() logs
-# cargo test test_redeem_sol -- --nocapture
+cargo test test_redeem_sol -- --nocapture
 
 # Test all
-cargo test
+# cargo test

@@ -1,34 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+	<img src="" alt="Paper Logo Here">
+	<h2>Paper</h2>
+	<p>
+		<strong>Solana Paper Wallet</strong>
+	</p>
+	<p>
+		<img src="https://img.shields.io/twitter/follow/k_quirapas?color=%2300acee&style=for-the-badge" alt="Twitter">
+		<img src="https://img.shields.io/github/commit-activity/w/kquirapas/solana-paper-wallet?style=for-the-badge" alt="Commit Activity">
+		<img src="https://img.shields.io/github/license/kquirapas/solana-paper-wallet?style=for-the-badge" alt="License">
+	</p>
+</div>
 
-## Getting Started
+Paper is a web application built on Solana for decoupling your balance from your wallet Keypair Wallets using a hash and seed phrase.
 
-First, run the development server:
+Keep your Solana in your physical wallet.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- Get balance
+- Can be used for Solana vouchers
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## License
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+WIP
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Contribution
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Thank you for your interest in contributing to Anchor! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) to learn how.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Much love to these people
+<div align="left">
+<a href="https://github.com/kquirapas/solana-paper-wallet/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=kquirapas/solana-paper-wallet" />
+</a>
+</div>
