@@ -1,5 +1,3 @@
-// #![cfg(feature = "test-bpf")]
-
 use {
     assert_matches::*,
     solana_program::{
@@ -13,7 +11,9 @@ use {
     borsh::{BorshSerialize, BorshDeserialize}
 };
 
-// Schema
+
+// Implementation Details on Client Side
+// Structs used for payload
 #[derive(BorshSerialize, BorshDeserialize)]
 pub struct StorePayload {
     code: String
@@ -25,56 +25,56 @@ pub struct RedeemPayload {
     hash: Pubkey
 }
 
-// #[test]
-// fn test_store_sol() {
-//     solana_logger::setup_with_default("solana_runtime::message=debug");
-//
-//     let program_id = Pubkey::new_unique();
-//
-//     let (test_validator, payer) = TestValidatorGenesis::default()
-//         .add_program("target/deploy/solana_paper_wallet", program_id)
-//         .start();
-//
-//     let rpc_client = test_validator.get_rpc_client();
-//
-//     let blockhash = rpc_client.get_latest_blockhash().unwrap();
-//
-//     // Construct instruction_data
-//     let payload_struct = StorePayload {
-//         code: "mycode".to_string()
-//     };
-//
-//     let mut payload = payload_struct.try_to_vec().unwrap();
-//     let mut instruction_data = vec![0];
-//
-//     instruction_data.append(&mut payload);
-//
-//     let (pda, bump_seed) = Pubkey::find_program_address(&[payload_struct.code.as_bytes(), payer.pubkey().as_ref()], &program_id);
-//
-//     let account_data = vec![
-//       AccountMeta::new(payer.pubkey(), true),
-//       AccountMeta::new(pda, false),
-//       AccountMeta::new(system_program::ID, false),
-//     ];
-//
-//     let mut transaction = Transaction::new_with_payer(
-//         &[
-//           Instruction {
-//               program_id,
-//               accounts: account_data,
-//               data: instruction_data,
-//           },
-//         ],
-//         Some(&payer.pubkey())
-//     );
-//     transaction.sign(&[&payer], blockhash);
-//
-//     assert_matches!(rpc_client.send_and_confirm_transaction(&transaction), Ok(_));
-// }
+#[test]
+fn test_store_sol() {
+    // solana_logger::setup_with_default("solana_runtime::message=debug");
+
+    let program_id = Pubkey::new_unique();
+
+    let (test_validator, payer) = TestValidatorGenesis::default()
+        .add_program("target/deploy/solana_paper_wallet", program_id)
+        .start();
+
+    let rpc_client = test_validator.get_rpc_client();
+
+    let blockhash = rpc_client.get_latest_blockhash().unwrap();
+
+    // Construct instruction_data
+    let payload_struct = StorePayload {
+        code: "mycode".to_string()
+    };
+
+    let mut payload = payload_struct.try_to_vec().unwrap();
+    let mut instruction_data = vec![0];
+
+    instruction_data.append(&mut payload);
+
+    let (pda, bump_seed) = Pubkey::find_program_address(&[payload_struct.code.as_bytes(), payer.pubkey().as_ref()], &program_id);
+
+    let account_data = vec![
+      AccountMeta::new(payer.pubkey(), true),
+      AccountMeta::new(pda, false),
+      AccountMeta::new(system_program::ID, false),
+    ];
+
+    let mut transaction = Transaction::new_with_payer(
+        &[
+          Instruction {
+              program_id,
+              accounts: account_data,
+              data: instruction_data,
+          },
+        ],
+        Some(&payer.pubkey())
+    );
+    transaction.sign(&[&payer], blockhash);
+
+    assert_matches!(rpc_client.send_and_confirm_transaction(&transaction), Ok(_));
+}
 
 #[test]
 fn test_redeem_sol() {
-    solana_logger::setup_with_default("solana_runtime::message=debug");
+    // solana_logger::setup_with_default("solana_runtime::message=debug");
 
     let program_id = Pubkey::new_unique();
 
@@ -94,7 +94,8 @@ fn test_redeem_sol() {
 
     let mut transaction = transfer(&payer, &user2.pubkey(), 1000000, blockhash);
     transaction.sign(&[&payer], blockhash);
-    rpc_client.send_and_confirm_transaction(&transaction);
+
+    let _signature = rpc_client.send_and_confirm_transaction(&transaction).unwrap();
 
     let balance = rpc_client.get_balance(&user2.pubkey()).expect("Failed to get balance from rpc_client");
     println!("AFTER TRANSFER user2 balance: {:?}", balance);
@@ -175,4 +176,9 @@ fn test_redeem_sol() {
     println!("user2: {:?}", new_balance);
 
     // assert_matches!(rpc_client.send_and_confirm_transaction(&transaction), Ok(_));
+}
+
+
+#[test]
+fn test_get_balance() {
 }

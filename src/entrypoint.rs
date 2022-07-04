@@ -6,24 +6,26 @@
  *
  */
 use solana_program::{
-    msg,
+    // msg,
     entrypoint,
     entrypoint::ProgramResult,
     pubkey::Pubkey,
     account_info::{next_account_info, AccountInfo},
     system_instruction,
-    program::{invoke_signed},
+    program::invoke_signed,
     program_error::ProgramError,
     sysvar::{rent::Rent, Sysvar}
 };
 
 use borsh::{BorshSerialize, BorshDeserialize};
 
+//
 use crate::instruction::Instruction;
-
 use crate::state::Holder;
+use crate::processor::transfer_lamports;
 
 entrypoint!(process_instruction);
+
 pub fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],
@@ -43,10 +45,6 @@ pub fn process_instruction(
             // Compute pda
             let (pda, bump_seed) = Pubkey::find_program_address(&[code.as_bytes(), initializer.key.as_ref()], program_id);
 
-            msg!("initializer as_ref {:?}", initializer.key.as_ref());
-            msg!("user_account: {}", user_account.key);
-            msg!("pda: {}", pda);
-
             if user_account.key != &pda {
               return Err(ProgramError::InvalidAccountData);
             }
@@ -58,8 +56,6 @@ pub fn process_instruction(
 
 
             // Create PDA account
-            msg!("user balance before transfer: {}", initializer.lamports());
-            msg!("pda balance before transfer: {}", user_account.lamports());
             invoke_signed(
                 &system_instruction::create_account(
                   initializer.key,
@@ -71,17 +67,12 @@ pub fn process_instruction(
                 &[initializer.clone(), user_account.clone(), system_program.clone()],
                 &[&[code.as_bytes(), initializer.key.as_ref(), &[bump_seed]]]
             )?;
-            msg!("user balance after transfer: {}", initializer.lamports());
-            msg!("pda balance after transfer: {}", user_account.lamports());
 
             // Update pda
             let holder = Holder { bump_seed };
             holder.serialize(&mut &mut user_account.data.borrow_mut()[..])?;
 
-            msg!("user account owner: {:?}", user_account.owner);
-
             let test = Holder::try_from_slice(&user_account.data.borrow()).unwrap();
-            msg!("store bump_seed: {:?}", test.bump_seed);
         },
 
 
@@ -103,15 +94,10 @@ pub fn process_instruction(
                 return Err(ProgramError::InvalidAccountData);
             }
 
-            msg!("user 2 before {}", initializer.lamports());
-
             transfer_lamports(user_account, initializer, user_account.lamports())?;
-            msg!("user 2 after {}", initializer.lamports());
 
             // Zero out data
             // *user_account.data.borrow_mut() = &mut [];
-
-            msg!("Redeem success");
         },
 
 
@@ -122,19 +108,12 @@ pub fn process_instruction(
     Ok(())
 }
 
-fn transfer_lamports(
-    from_account: &AccountInfo,
-    to_account: &AccountInfo,
-    amount_of_lamports: u64
-) -> ProgramResult {
 
-    if **from_account.try_borrow_lamports()? < amount_of_lamports {
-        return Err(ProgramError::InsufficientFunds);
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn it_works() {
+        let result = 2 + 2;
+        assert_eq!(result, 4);
     }
-
-    // Debit from_account and credit to_account
-    **from_account.try_borrow_mut_lamports()? -= amount_of_lamports;
-    **to_account.try_borrow_mut_lamports()? += amount_of_lamports;
-
-    Ok(())
 }
