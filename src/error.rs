@@ -9,7 +9,16 @@ pub enum CustomError {
 
     // Custom program error 0x1... so on...
     #[error("Instruction command was not recognized")]
-    InvalidInstructionCommand
+    InvalidInstructionCommand,
+
+    #[error("Wrong account owner")]
+    InvalidAccountOwner,
+
+    #[error("Holder account not empty")]
+    InvalidNotEmptyStore,
+
+    #[error("Holder account is empty")]
+    InvalidEmptyRedeem
 }
 
 impl From<CustomError> for ProgramError {

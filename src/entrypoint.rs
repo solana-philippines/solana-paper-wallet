@@ -8,16 +8,15 @@ use solana_program::{
     pubkey::Pubkey,
     account_info::{next_account_info, AccountInfo},
     system_instruction,
-    program::invoke_signed,
-    program_error::ProgramError
+    program::invoke_signed
 };
 
 use borsh::BorshSerialize;
 
 use crate::instruction::Instruction;
 use crate::state::Holder;
-use crate::processor::transfer_lamports;
 use crate::error::CustomError;
+use crate::processor::{transfer_lamports, validate_input};
 
 // Set the entrypoint (First function transactions interact with)
 entrypoint!(process_instruction);
@@ -25,8 +24,9 @@ entrypoint!(process_instruction);
 
 // Security checks
 // 1. user_account == holder PDA
-// 2. if store -> check if data_is_empty()
-// 3. if redeem -> check if data_is_empty()
+// 2. user_account.owner == program_id
+// 3. if store -> check if data_is_empty()
+// 4. if redeem -> check if data_is_empty()
 pub fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],
@@ -47,9 +47,11 @@ pub fn process_instruction(
             let (holder, bump_seed) = Pubkey::find_program_address(&[code.as_bytes(), initializer.key.as_ref()], program_id);
 
             // Account Validation
-            // PDA key being accessed is not the intended
-            if user_account.key != &holder{
-              return Err(ProgramError::InvalidAccountData);
+            let _ = validate_input(&program_id, user_account, &holder)?;
+
+            // Instruction Specific Data Validation
+            if !user_account.data_is_empty() {
+                return Err(CustomError::InvalidNotEmptyStore.into());
             }
 
             // Account len in bytes
@@ -89,17 +91,19 @@ pub fn process_instruction(
                     program_id
                 );
 
-            // Account validation
-            // PDA key being accessed is not the intended
-            if *user_account.key != holder {
-                return Err(CustomError::InvalidCredentials.into());
+            // Account Validation
+            let _ = validate_input(&program_id, user_account, &holder)?;
+
+            // Instruction Specific Data Validation
+            if user_account.data_is_empty() {
+                return Err(CustomError::InvalidEmptyRedeem.into());
             }
 
             // Transfer lamports to signer from Holder PDA
             transfer_lamports(user_account, initializer, user_account.lamports())?;
 
             // Empty data field after redeem
-            *user_account.data.borrow_mut() = &mut [];
+            let _ = &user_account.realloc(0, true)?;
         }
     }
 
