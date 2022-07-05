@@ -11,7 +11,6 @@ use crate::error::CustomError;
 
 // Initial input validations
 pub fn validate_input(
-    program_id: &Pubkey,
     user_account: &AccountInfo,
     holder_pda: &Pubkey
 ) -> ProgramResult {
@@ -19,11 +18,6 @@ pub fn validate_input(
     // PDA key being accessed is not the intended
     if user_account.key != holder_pda {
         return Err(CustomError::InvalidCredentials.into());
-    }
-    // Owner Validation
-    // Holder PDA must be owned by program
-    if user_account.owner != program_id {
-        return Err(CustomError::InvalidAccountOwner.into());
     }
 
     Ok(())

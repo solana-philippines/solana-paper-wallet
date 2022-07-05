@@ -47,7 +47,7 @@ pub fn process_instruction(
             let (holder, bump_seed) = Pubkey::find_program_address(&[code.as_bytes(), initializer.key.as_ref()], program_id);
 
             // Account Validation
-            let _ = validate_input(&program_id, user_account, &holder)?;
+            let _ = validate_input(user_account, &holder)?;
 
             // Instruction Specific Data Validation
             if !user_account.data_is_empty() {
@@ -92,11 +92,17 @@ pub fn process_instruction(
                 );
 
             // Account Validation
-            let _ = validate_input(&program_id, user_account, &holder)?;
+            let _ = validate_input(user_account, &holder)?;
 
             // Instruction Specific Data Validation
             if user_account.data_is_empty() {
                 return Err(CustomError::InvalidEmptyRedeem.into());
+            }
+
+            // Owner Validation
+            // Holder PDA must be owned by program
+            if user_account.owner != program_id {
+                return Err(CustomError::InvalidAccountOwner.into());
             }
 
             // Transfer lamports to signer from Holder PDA

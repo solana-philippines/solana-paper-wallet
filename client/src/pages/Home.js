@@ -1,20 +1,21 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import Container from '../components/Container';
-import Section from '../components/Section';
-import Label from '../components/Label';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import Icon from '../components/Icon';
-import Logo from '../components/Logo';
+import Container from "../components/Container";
+import Section from "../components/Section";
+import Label from "../components/Label";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Icon from "../components/Icon";
+import Logo from "../components/Logo";
 
 export default function Home() {
   return (
     <>
       <StyledHeader>
         <section>
-          <Logo size="60px"/>
-          <h1>Solana at your <span>Fingertips</span></h1>
+          <h1>
+            Solana at your <span>Fingertips</span>
+          </h1>
           <p>Store your Solana on paper then forget about it</p>
           <Label type={"handyman"} content="Now on Devnet" />
         </section>
@@ -28,11 +29,18 @@ export default function Home() {
             <div id="circle"></div>
             <h2 id="content">What is paper wallet?</h2>
           </StyledIcon>
-          <p>Paper Wallet is a tool you can use to store your Solana away from your Keypair Wallet. This is done by using a seed phrase and a hash to store your Solana in a PDA by the Paper Program.</p>
+          <p>
+            Paper Wallet is a tool you can use to store your Solana away from
+            your Keypair Wallet. This is done by using a seed phrase and a hash
+            to store your Solana in a PDA by the Paper Program.
+          </p>
         </Section>
         <Section columns={2}>
           <h2>Why on Devnet?</h2>
-          <p>I still have a lot to do with securing the code, so I want to make sure I do my maximum first before I deploy it to mainnet.</p>
+          <p>
+            I still have a lot to do with securing the code, so I want to make
+            sure I do my maximum first before I deploy it to mainnet.
+          </p>
         </Section>
       </Container>
 
@@ -42,9 +50,9 @@ export default function Home() {
             <h1>How to test Paper Wallet</h1>
           </Section>
           <Section columns={1}>
-            <Label type="front_hand" content="Claim from Airdrop"/>
-            <Label type="savings" content="Store your Solana"/>
-            <Label type="payments" content="Redeem in a different wallet"/>
+            <Label type="front_hand" content="Claim from Airdrop" />
+            <Label type="savings" content="Store your Solana" />
+            <Label type="payments" content="Redeem in a different wallet" />
           </Section>
         </Section>
       </StyledHowTo>
@@ -61,7 +69,21 @@ const StyledHeader = styled.header`
   width: 100vw;
   min-height: 100vh;
 
-  background-image: radial-gradient(circle, #00ffa2, #00eed8, #00d7ff, #00bcff, #617df2, #9355d4, #8d036e, #610e42, #340f20, #000000, #000000, #000000);
+  background-image: radial-gradient(
+    circle,
+    #00ffa2,
+    #00eed8,
+    #00d7ff,
+    #00bcff,
+    #617df2,
+    #9355d4,
+    #8d036e,
+    #610e42,
+    #340f20,
+    #000000,
+    #000000,
+    #000000
+  );
 
   section {
     display: flex;
@@ -93,7 +115,7 @@ const StyledHeader = styled.header`
   }
 
   p {
-    margin: 2em 0;
+    margin: 1em 0;
     font-family: Lato Regular;
     font-size: 2em;
     color: colors.GLASS;
@@ -109,8 +131,22 @@ const StyledNavHolder = styled.nav`
 `;
 
 const StyledHowTo = styled.section`
-  width:  100%;
-  background-image: linear-gradient(to right top, #000000, #340f20, #610e42, #8d036e, #b400a5, #9355d4, #617df2, #009cff, #00bcff, #00d7ff, #00eed8, #00ffa2);
+  width: 100%;
+  background-image: linear-gradient(
+    to right top,
+    #000000,
+    #340f20,
+    #610e42,
+    #8d036e,
+    #b400a5,
+    #9355d4,
+    #617df2,
+    #009cff,
+    #00bcff,
+    #00d7ff,
+    #00eed8,
+    #00ffa2
+  );
 `;
 
 const StyledIcon = styled.div`

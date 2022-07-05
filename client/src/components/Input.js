@@ -1,11 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import * as colors from '../modules/colors';
+import * as colors from "../modules/colors";
 
-export default function Input({ reference }) {
-  return (
-    <StyledInput ref={reference} type="text" />
-  );
+export default function Input({ reference, type }) {
+  return <StyledInput ref={reference} type={type || "text"} />;
 }
 
 const StyledInput = styled.input`
@@ -13,17 +11,19 @@ const StyledInput = styled.input`
   box-sizing: border-box;
   font-family: Lato Bold;
   padding: 0.5em 1.5em;
-  font-size: 2em;
+  font-size: 1.5em;
   background-color: ${colors.FOG};
   border: 5px solid transparent;
-  border-radius: 2em;
+  border-radius: 0.7em;
 
   width: 100%;
   max-width: 500px;
 
   color: ${colors.WHITE};
 
-  &:hover, &:active, &:focus {
+  &:hover,
+  &:active,
+  &:focus {
     border: 5px solid ${colors.GLASS};
   }
 `;

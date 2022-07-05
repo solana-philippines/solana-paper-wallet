@@ -22,7 +22,7 @@ export default function Airdrop() {
         setErrorMessage("Requesting for Airdrop...");
 
         // Request for airdrop
-        await airdrop(connection, wallet);
+        await airdrop(connection, wallet.publicKey);
 
         setLoading(false);
         setErrorMessage("Success. Check your wallet");
@@ -106,7 +106,7 @@ const StyledHeader = styled.header`
   }
 
   p {
-    margin: 2em 0;
+    margin: 1em 0;
     font-family: Lato Regular;
     font-size: 2em;
     color: colors.GLASS;

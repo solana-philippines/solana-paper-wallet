@@ -1,5 +1,6 @@
+import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
-import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { useError } from "../components/ErrorContext";
 
 export async function getProvider() {
   if (!("solana" in window)) {
@@ -24,6 +25,5 @@ export async function airdrop(connection, walletPubkey) {
     await connection.requestAirdrop(walletPubkey, 1 * LAMPORTS_PER_SOL);
   } catch (e) {
     console.error(e);
-    throw Error(e.message);
   }
 }

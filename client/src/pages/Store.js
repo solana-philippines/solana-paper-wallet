@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import Label from "../components/Label";
 
 import { paperStore } from "../modules/paper";
 import { useWallet } from "../components/WalletContext";
@@ -12,21 +13,53 @@ import { useError } from "../components/ErrorContext";
 export default function Airdrop() {
   const { wallet, connection } = useWallet();
   const { error, setErrorMessage } = useError();
-
   const [loading, setLoading] = useState(false);
 
-  const store = async () => {};
+  const codeInputRef = useRef(null);
+  const confirmCodeInputRef = useRef(null);
+
+  const store = async () => {
+    if (codeInputRef.current.value !== confirmCodeInputRef.current.value) {
+      setErrorMessage("Passwords not the same");
+      return;
+    }
+
+    setLoading(true);
+    setErrorMessage("");
+
+    try {
+      const signature = await paperStore(
+        connection,
+        wallet,
+        codeInputRef.current.value
+      );
+
+      setLoading(false);
+      setErrorMessage("Stored. Your wallet must be 0 by now");
+    } catch (e) {
+      setLoading(false);
+      setErrorMessage(e.message);
+    }
+  };
 
   return (
     <>
       <StyledHeader>
+        <div id="nav-padding"></div>
         <section>
           <h1>
             <span>Store</span> your Solana
           </h1>
+          <p>Password</p>
+          <Input reference={codeInputRef} type="password" />
+          <p>Confirm Password</p>
+          <Input reference={confirmCodeInputRef} type="password" />
           <p>{error ? error : ""}</p>
-
-          {!loading && <Button msg="Request Airdrop" func={store} />}
+          {!loading ? (
+            <Button msg="Store Solana" func={store} />
+          ) : (
+            <Label content="Trying to store..." />
+          )}
         </section>
       </StyledHeader>
       <StyledNavHolder>
@@ -87,7 +120,7 @@ const StyledHeader = styled.header`
   }
 
   p {
-    margin: 2em 0;
+    margin: 1em 0;
     font-family: Lato Regular;
     font-size: 2em;
     color: colors.GLASS;
