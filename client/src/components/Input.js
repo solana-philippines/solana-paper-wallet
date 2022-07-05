@@ -15,7 +15,7 @@ const StyledInput = styled.input`
   padding: 0.5em 1.5em;
   font-size: 2em;
   background-color: ${colors.FOG};
-  border: 1px solid transparent;
+  border: 5px solid transparent;
   border-radius: 2em;
 
   width: 100%;
@@ -24,6 +24,6 @@ const StyledInput = styled.input`
   color: ${colors.WHITE};
 
   &:hover, &:active, &:focus {
-    border: 1px solid ${colors.GLASS};
+    border: 5px solid ${colors.GLASS};
   }
 `;

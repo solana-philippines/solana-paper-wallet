@@ -19,6 +19,11 @@ export async function getProvider() {
   }
 }
 
-export async function airdrop(connection, wallet) {
-  await connection.requestAirdrop(wallet.publicKey, 1 * LAMPORTS_PER_SOL);
+export async function airdrop(connection, walletPubkey) {
+  try {
+    await connection.requestAirdrop(walletPubkey, 1 * LAMPORTS_PER_SOL);
+  } catch (e) {
+    console.error(e);
+    throw Error(e.message);
+  }
 }

@@ -17,6 +17,11 @@
 //  Program by Kristian Quirapas
 // 
 
+// TODO: Replace expects() and unwraps() to handlers
+// TODO: Remove transaction fee
+// TODO: Make hash more secure by introducing hashing algorithm + randomness
+// TODO: Upgrade code to an entire seedphrase
+
 // Where Instructions are processed
 mod entrypoint;
 

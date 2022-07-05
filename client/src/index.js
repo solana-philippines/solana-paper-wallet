@@ -5,23 +5,30 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
-import Airdrop from './pages/Aidrop';
+import Airdrop from './pages/Airdrop';
+import Store from './pages/Store';
+import Redeem from './pages/Redeem';
 import NotFound from './pages/NotFound';
 
 import { WalletProvider } from './components/WalletContext';
+import { ErrorProvider } from './components/ErrorContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <WalletProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/airdrop" element={<Airdrop />} />
-          <Route exact path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </WalletProvider>
+    <ErrorProvider>
+      <WalletProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/airdrop" element={<Airdrop />} />
+            <Route exact path="/store" element={<Store />} />
+            <Route exact path="/redeem" element={<Redeem />} />
+            <Route exact path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </WalletProvider>
+    </ErrorProvider>
   </React.StrictMode>
 );
 

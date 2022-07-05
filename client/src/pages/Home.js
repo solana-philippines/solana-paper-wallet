@@ -6,13 +6,14 @@ import Label from '../components/Label';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Icon from '../components/Icon';
+import Logo from '../components/Logo';
 
 export default function Home() {
   return (
     <>
       <StyledHeader>
         <section>
-          <img src="" alt="Paper Wallet Logo (Still Making One)" />
+          <Logo size="60px"/>
           <h1>Solana at your <span>Fingertips</span></h1>
           <p>Store your Solana on paper then forget about it</p>
           <Label type={"handyman"} content="Now on Devnet" />

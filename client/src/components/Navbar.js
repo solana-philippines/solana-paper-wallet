@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import * as colors from '../modules/colors';
 
+import Logo from './Logo';
 import { useWallet } from './WalletContext';
 
 export default function Navbar() {
@@ -11,10 +12,11 @@ export default function Navbar() {
 
   return (
     <StyledNav>
+      <Logo size="30px" />
       <Link to="/">Home</Link>
       <Link to="/airdrop">Airdrop</Link>
-      <Link to="/">Store</Link>
-      <Link to="/">Redeem</Link>
+      <Link to="/store">Store</Link>
+      <Link to="/redeem">Redeem</Link>
 
       { !wallet && 
       <StyledConnect type="button" onClick={connect}>Connect Wallet</StyledConnect>

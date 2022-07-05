@@ -13,6 +13,8 @@ export function useWallet() {
 
 export function WalletProvider({ children }) {
   const [wallet, setWallet] = useState(null)
+
+  // for providing the connection to everyone
   const connection = new Connection(clusterApiUrl('devnet'), 'finalized');
 
   useEffect(() => {
