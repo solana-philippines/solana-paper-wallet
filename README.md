@@ -19,12 +19,12 @@
 ```
 
 <div align="center">
-	<img src="" alt="Paper Logo Here">
 	<h2>Paper</h2>
 	<p>
 		<strong>Solana Paper Wallet</strong>
 	</p>
 	<p>
+		<img src="https://img.shields.io/github/issues/kquirapas/solana-paper-wallet?style=for-the-badge" alt="Issues">
 		<img src="https://img.shields.io/twitter/follow/k_quirapas?color=%2300acee&style=for-the-badge" alt="Twitter">
 		<img src="https://img.shields.io/github/commit-activity/w/kquirapas/solana-paper-wallet?style=for-the-badge" alt="Commit Activity">
 		<img src="https://img.shields.io/github/license/kquirapas/solana-paper-wallet?style=for-the-badge" alt="License">
