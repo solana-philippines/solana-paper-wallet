@@ -19,6 +19,10 @@ Keep your Solana in your physical wallet, but make sure you secure your credenti
 
 WIP
 
+## Original Idea
+
+This idea of a paper wallet came from the **Blockchain Whisperer**. He implemented one in Ethereum with ERC20s, so I decided to make one for Solana.
+
 ## Contribution
 
 Thank you for your interest in contributing to Anchor! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) to learn how.
