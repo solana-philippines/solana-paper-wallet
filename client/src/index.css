@@ -1,0 +1,50 @@
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+  font-family: 'RobotoMono Regular';
+  src: url(./fonts/RobotoMono/RobotoMono-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoSlab Black';
+  src: url(./fonts/Roboto_Slab/static/RobotoSlab-Black.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato Black';
+  src: url(./fonts/Lato/Lato-Black.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato Regular';
+  src: url(./fonts/Lato/Lato-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato Bold';
+  src: url(./fonts/Lato/Lato-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato Bold';
+  src: url(./fonts/Lato/Lato-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Fredoka Bold';
+  src: url(./fonts/Fredoka/static/Fredoka/Fredoka-Bold.ttf) format('truetype');
+}
