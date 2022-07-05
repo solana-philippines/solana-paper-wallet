@@ -1,34 +1,33 @@
-import * as borsh from '@project-serum/borsh';
-import * as web3 from '@solana/web3.js';
-import { Buffer } from 'buffer';
+import * as borsh from "@project-serum/borsh";
+import * as web3 from "@solana/web3.js";
+import { Buffer } from "buffer";
 
 // @ts-ignore
 window.Buffer = Buffer;
 
-const PROGRAM_ID = 'ELUr5zjYLapKTVNaKXUFu3A5CUM21YMUhf6VSxhnZrB9';
+const PROGRAM_ID = "ELUr5zjYLapKTVNaKXUFu3A5CUM21YMUhf6VSxhnZrB9";
 
-const StoreSchema = borsh.struct([
-  borsh.u8('inst'),
-  borsh.str('code')
-]);
+const StoreSchema = borsh.struct([borsh.u8("inst"), borsh.str("code")]);
 
 async function paperStore(connection, provider, code) {
   // build instruction buffer
   let buffer = Buffer.alloc(1000);
 
-  StoreSchema.encode({
-    inst: 0,
-    code
-  }, buffer);
+  StoreSchema.encode(
+    {
+      inst: 0,
+      code,
+    },
+    buffer
+  );
 
   buffer = buffer.slice(0, StoreSchema.getSpan(buffer));
 
   // PDA findProgramAddress
-  const [userAccountPDA, bump] =
-    await web3.PublicKey.findProgramAddress([
-      Buffer.from(code),
-      provider.publicKey.toBuffer()
-    ], new web3.PublicKey(PROGRAM_ID));
+  const [userAccountPDA, bump] = await web3.PublicKey.findProgramAddress(
+    [Buffer.from(code), provider.publicKey.toBuffer()],
+    new web3.PublicKey(PROGRAM_ID)
+  );
 
   // create solana Instruction
   const instruction = new web3.TransactionInstruction({
@@ -36,21 +35,21 @@ async function paperStore(connection, provider, code) {
       {
         pubkey: provider.publicKey,
         isSigner: true,
-        isWritable: false
+        isWritable: false,
       },
       {
         pubkey: userAccountPDA,
         isSigner: false,
-        isWritable: true 
+        isWritable: true,
       },
       {
         pubkey: web3.SystemProgram.programId,
         isSigner: false,
-        isWritable: false
+        isWritable: false,
       },
     ],
     data: buffer,
-    programId: new web3.PublicKey(PROGRAM_ID)
+    programId: new web3.PublicKey(PROGRAM_ID),
   });
 
   // create Transaction
@@ -63,8 +62,9 @@ async function paperStore(connection, provider, code) {
   transaction.feePayer = provider.publicKey;
 
   // add recent blockhash to transaction
-  const blockhashPromise =
-    await connection.getLatestBlockhash(connection.commitment);
+  const blockhashPromise = await connection.getLatestBlockhash(
+    connection.commitment
+  );
   const blockhash = await blockhashPromise.blockhash;
 
   transaction.recentBlockhash = blockhash;
@@ -72,40 +72,43 @@ async function paperStore(connection, provider, code) {
   // sign transaction
   const signedTransaction = await provider.signTransaction(transaction);
 
-  const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+  const signature = await connection.sendRawTransaction(
+    signedTransaction.serialize()
+  );
 
   await connection.confirmTransaction(signature);
 
   return signature;
 }
 
-
 // wallet 1 hash: 38AUuVE5SunNhv6BaQMFCYKtK4E2QGVPGuzCxAYw7SUM
 // treasury hash: Wd7Cmk63QmZU1t8ivf5mYsmMeBNRYqj8BTFoUGPX8ht
 const RedeemSchema = borsh.struct([
-  borsh.u8('inst'),
-  borsh.str('code'),
-  borsh.publicKey('hash')
+  borsh.u8("inst"),
+  borsh.str("code"),
+  borsh.publicKey("hash"),
 ]);
 
 async function paperRedeem(connection, provider, code, hash) {
   // build instruction buffer
   let buffer = Buffer.alloc(1000);
 
-  RedeemSchema.encode({
-    inst: 1,
-    code,
-    hash
-  }, buffer);
+  RedeemSchema.encode(
+    {
+      inst: 1,
+      code,
+      hash,
+    },
+    buffer
+  );
 
   buffer = buffer.slice(0, RedeemSchema.getSpan(buffer));
 
   // PDA findProgramAddress
-  const [userAccountPDA, bump] =
-    await web3.PublicKey.findProgramAddress([
-      Buffer.from(code),
-      hash.toBuffer()
-    ], new web3.PublicKey(PROGRAM_ID));
+  const [userAccountPDA, bump] = await web3.PublicKey.findProgramAddress(
+    [Buffer.from(code), hash.toBuffer()],
+    new web3.PublicKey(PROGRAM_ID)
+  );
 
   // create solana Instruction
   const instruction = new web3.TransactionInstruction({
@@ -113,21 +116,21 @@ async function paperRedeem(connection, provider, code, hash) {
       {
         pubkey: provider.publicKey,
         isSigner: true,
-        isWritable: false
+        isWritable: false,
       },
       {
         pubkey: userAccountPDA,
         isSigner: false,
-        isWritable: true
+        isWritable: true,
       },
       {
         pubkey: web3.SystemProgram.programId,
         isSigner: false,
-        isWritable: false
+        isWritable: false,
       },
     ],
     data: buffer,
-    programId: new web3.PublicKey(PROGRAM_ID)
+    programId: new web3.PublicKey(PROGRAM_ID),
   });
 
   // create Transaction
@@ -140,8 +143,9 @@ async function paperRedeem(connection, provider, code, hash) {
   transaction.feePayer = provider.publicKey;
 
   // add recent blockhash to transaction
-  const blockhashPromise =
-    await connection.getLatestBlockhash(connection.commitment);
+  const blockhashPromise = await connection.getLatestBlockhash(
+    connection.commitment
+  );
   const blockhash = await blockhashPromise.blockhash;
 
   transaction.recentBlockhash = blockhash;
@@ -149,14 +153,13 @@ async function paperRedeem(connection, provider, code, hash) {
   // sign transaction
   const signedTransaction = await provider.signTransaction(transaction);
 
-  const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+  const signature = await connection.sendRawTransaction(
+    signedTransaction.serialize()
+  );
 
   await connection.confirmTransaction(signature);
 
   return signature;
 }
 
-export {
-  paperStore,
-  paperRedeem
-};
+export { paperStore, paperRedeem };

@@ -14,7 +14,6 @@
 // 
 //  A program to decouple your SOL from your wallet.
 // 
-//  Program by Kristian Quirapas
 // 
 
 // TODO: Replace expects() and unwraps() to handlers

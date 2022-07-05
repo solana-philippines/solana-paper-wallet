@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
-import { airdrop } from "../modules/utils";
+import { paperStore } from "../modules/paper";
 import { useWallet } from "../components/WalletContext";
 import { useError } from "../components/ErrorContext";
 
@@ -15,26 +15,7 @@ export default function Airdrop() {
 
   const [loading, setLoading] = useState(false);
 
-  const getAirdrop = async () => {
-    if (connection && wallet) {
-      try {
-        setLoading(true);
-        setErrorMessage("Requesting for Airdrop...");
-
-        // Request for airdrop
-        await airdrop(connection, wallet);
-
-        setLoading(false);
-        setErrorMessage("Success. Check your wallet");
-      } catch (e) {
-        setLoading(false);
-        setErrorMessage(e.message);
-      }
-    } else {
-      setLoading(false);
-      setErrorMessage("Connect your wallet first");
-    }
-  };
+  const store = async () => {};
 
   return (
     <>
@@ -45,7 +26,7 @@ export default function Airdrop() {
           </h1>
           <p>{error ? error : ""}</p>
 
-          {!loading && <Button msg="Request Airdrop" func={getAirdrop} />}
+          {!loading && <Button msg="Request Airdrop" func={store} />}
         </section>
       </StyledHeader>
       <StyledNavHolder>
