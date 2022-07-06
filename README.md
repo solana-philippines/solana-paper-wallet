@@ -42,6 +42,10 @@ Keep your Solana in your physical wallet.
 
 <a href="https://github.com/kquirapas/solana-paper-wallet">Solana Paper Wallet</a>
 
+## Demo Video
+
+<a href="https://youtu.be/Q_MpMqxS8U4">Youtube Demo Video</a>
+
 ## License
 
 WIP
