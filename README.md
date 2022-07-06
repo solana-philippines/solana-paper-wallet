@@ -1,24 +1,5 @@
-```
-                  
-                   
-                     /$$$$$$$                                        
-                    | $$__  $$                                       
-                    | $$  \ $$ /$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$ 
-                    | $$$$$$$/|____  $$ /$$__  $$ /$$__  $$ /$$__  $$
-                    | $$____/  /$$$$$$$| $$  \ $$| $$$$$$$$| $$  \__/
-                    | $$      /$$__  $$| $$  | $$| $$_____/| $$      
-                    | $$     |  $$$$$$$| $$$$$$$/|  $$$$$$$| $$      
-                    |__/      \_______/| $$____/  \_______/|__/      
-                                       | $$                          
-                                       | $$                          
-                                       |__/  
-                   
-                    A program to decouple your SOL from your wallet.
-                   
-                   
-```
-
 <div align="center">
+	<img width="150px" src="client/public/assets/logo.png" alt="Paper Logo">
 	<h2>Paper</h2>
 	<p>
 		<strong>Solana Paper Wallet</strong>
