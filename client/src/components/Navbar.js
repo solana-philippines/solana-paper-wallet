@@ -1,45 +1,89 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import * as colors from "../modules/colors";
 
 import Logo from "./Logo";
+import Icon from "./Icon";
+
 import { useWallet } from "./WalletContext";
 
 // variable to prevent double connecting
 let mounted = false;
 
 export default function Navbar() {
+  const [displayMobileNav, setDisplayMobileNav] = useState(false);
   const { wallet, connect } = useWallet();
 
   useEffect(() => {
     if (!mounted) {
-      connect();
+      // connect();
       mounted = true; // prevent double connection
     }
   }, []);
 
-  return (
-    <StyledNav>
-      <Logo size="30px" />
-      <Link to="/">Home</Link>
-      <Link to="/airdrop">Airdrop</Link>
-      <Link to="/store">Store</Link>
-      <Link to="/redeem">Redeem</Link>
+  const open = () => {
+    // toggle display
+    setDisplayMobileNav((prev) => !prev);
+  };
 
-      {!wallet ? (
-        <StyledConnect type="button" onClick={connect}>
-          Connect Wallet
-        </StyledConnect>
-      ) : (
-        <StyledAddress>
-          {wallet.publicKey.toString().slice(0, 5) +
-            "..." +
-            wallet.publicKey.toString().slice(-6, -1)}
-        </StyledAddress>
-      )}
-    </StyledNav>
+  return (
+    <>
+      <StyledNav>
+        <Logo size="30px" />
+        <Link to="/">Home</Link>
+        <Link to="/airdrop">Airdrop</Link>
+        <Link to="/store">Store</Link>
+        <Link to="/redeem">Redeem</Link>
+
+        {!wallet ? (
+          <StyledConnect type="button" onClick={connect}>
+            Connect Wallet
+          </StyledConnect>
+        ) : (
+          <StyledAddress>
+            {wallet.publicKey.toString().slice(0, 5) +
+              "..." +
+              wallet.publicKey.toString().slice(-6, -1)}
+          </StyledAddress>
+        )}
+      </StyledNav>
+
+      <StyledMobileNav display={displayMobileNav.toString()}>
+        <div id="mobile-nav-header">
+          {!wallet ? (
+            <StyledConnect type="button" onClick={connect}>
+              Connect Wallet
+            </StyledConnect>
+          ) : (
+            <StyledAddress>
+              {wallet.publicKey.toString().slice(0, 5) +
+                "..." +
+                wallet.publicKey.toString().slice(-6, -1)}
+            </StyledAddress>
+          )}
+          <StyledButton onClick={open}>
+            <Icon type="menu" />
+          </StyledButton>
+        </div>
+
+        {displayMobileNav && (
+          <div id="mobile-nav-links">
+            <aside id="left">
+              <Logo size="20px" />
+              <h2>Paper Wallet</h2>
+            </aside>
+            <aside id="right">
+              <Link to="/">Home</Link>
+              <Link to="/airdrop">Airdrop</Link>
+              <Link to="/store">Store</Link>
+              <Link to="/redeem">Redeem</Link>
+            </aside>
+          </div>
+        )}
+      </StyledMobileNav>
+    </>
   );
 }
 
@@ -104,5 +148,72 @@ const StyledNav = styled.nav`
 
     &:active {
     }
+  }
+
+  @media only screen and (max-width: 900px) {
+    display: none;
+  }
+`;
+
+const StyledMobileNav = styled.nav`
+  ${({ display }) => display === "true" && `background-color: black;`}
+
+  display: none;
+  box-sizing: border-box;
+  width: 100vw;
+  padding: 1em 2em;
+
+  @media only screen and (max-width: 900px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  #mobile-nav-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #mobile-nav-links {
+    box-sizing: border-box;
+    margin-top: 2em;
+    padding-bottom: 1em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    #left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    #right {
+      display: flex;
+      flex-direction: column;
+
+      a {
+        text-align: right;
+        text-decoration: none;
+        color: white;
+        font-size: 2em;
+        font-family: Lato Regular;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+`;
+
+const StyledButton = styled.span`
+  font-size: 2em;
+
+  &:hover {
+    cursor: pointer;
   }
 `;

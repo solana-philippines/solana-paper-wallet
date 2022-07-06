@@ -1,10 +1,9 @@
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
-import Section from '../components/Section';
-import Logo from '../components/Logo';
-import * as colors from '../modules/colors';
+import Section from "../components/Section";
+import Logo from "../components/Logo";
+import * as colors from "../modules/colors";
 
 export default function Footer() {
   return (
@@ -80,4 +79,13 @@ const StyledCopyright = styled.div`
   border-top: 1px solid #474747;
   padding: 2em;
   font-family: Lato Regular;
+
+  p {
+    padding: 0;
+    margin: 0;
+  }
+
+  @media only screen and (max-width: 900px) {
+    text-align: center;
+  }
 `;

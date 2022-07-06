@@ -1,11 +1,12 @@
+import styled from "styled-components";
 
-import styled from 'styled-components';
-
-import * as colors from '../modules/colors';
+import * as colors from "../modules/colors";
 
 export default function Button({ msg, func }) {
-  return(
-    <StyledButton type="button" onClick={func}>{ msg }</StyledButton>
+  return (
+    <StyledButton type="button" onClick={func}>
+      {msg}
+    </StyledButton>
   );
 }
 
@@ -24,11 +25,17 @@ const StyledButton = styled.button`
 
   color: ${colors.WHITE};
 
-  &:hover, &:active, &:focus {
+  &:hover,
+  &:active,
+  &:focus {
     background-image: linear-gradient(to right bottom, #db1fff, #00ffa2);
   }
 
   &:hover {
     cursor: pointer;
+  }
+
+  @media only screen and (max-width: 900px) {
+    font-size: 1.5em;
   }
 `;

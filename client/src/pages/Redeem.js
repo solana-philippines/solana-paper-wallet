@@ -93,8 +93,8 @@ const StyledHeader = styled.header`
     justify-content: center;
     align-items: center;
     width: 100%;
+    min-height: 900px;
     height: 100vh;
-    min-height: 700px;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 0 5em;
     box-sizing: border-box;
@@ -121,6 +121,16 @@ const StyledHeader = styled.header`
     font-family: Lato Regular;
     font-size: 2em;
     color: colors.GLASS;
+  }
+
+  @media only screen and (max-width: 900px) {
+    h1 {
+      font-size: 4em;
+    }
+
+    p {
+      font-size: 1.5em;
+    }
   }
 `;
 

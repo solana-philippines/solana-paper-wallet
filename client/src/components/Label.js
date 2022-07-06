@@ -1,14 +1,13 @@
+import styled from "styled-components";
 
-import styled from 'styled-components';
-
-import * as colors from '../modules/colors';
-import Icon from './Icon';
+import * as colors from "../modules/colors";
+import Icon from "./Icon";
 
 export default function Label({ content, type }) {
   return (
     <StyledLabel>
-      { type && <Icon type={type} /> }
-      { content }
+      {type && <Icon type={type} />}
+      {content}
     </StyledLabel>
   );
 }

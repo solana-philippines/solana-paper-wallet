@@ -1,17 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export default function Section({ columns, children }) {
-  return (
-      <StyledSection columns={columns}>
-        { children }
-      </StyledSection>
-  );
+  return <StyledSection columns={columns}>{children}</StyledSection>;
 }
 
 const StyledSection = styled.section`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(${props => props.columns || 1}, 1fr);
+  grid-template-columns: repeat(${(props) => props.columns || 1}, 1fr);
   grid-gap: 3em;
   box-sizing: border-box;
   padding: 5em 2em;
@@ -32,5 +28,9 @@ const StyledSection = styled.section`
   p {
     font-family: Lato Regular;
     font-size: 1.5em;
+  }
+
+  @media only screen and (max-width: 900px) {
+    grid-template-columns: 1fr;
   }
 `;
