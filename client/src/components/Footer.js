@@ -10,7 +10,7 @@ export default function Footer() {
     <StyledFooter>
       <Section columns={2}>
         <StyledDiv>
-          <Logo size="30px" />
+          <Logo size="60px" />
           <h2 style={{ textAlign: "left", margin: "0 0.5em" }}>Paper Wallet</h2>
         </StyledDiv>
         <StyledFooterNav>

@@ -1,16 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import * as colors from '../modules/colors';
+import * as colors from "../modules/colors";
 
 export default function Logo({ size }) {
-  return (
-    <StyledLogo size={size}></StyledLogo>
-  );
+  return <StyledLogo src="/assets/logo.png" size={size}></StyledLogo>;
 }
 
-const StyledLogo = styled.div`
-  width: ${props => props.size || '20px'};
-  height: ${props => props.size || '20px'};
-  border-radius: 100%;
-  background-image: linear-gradient(to left top, #db1fff, #00ffa2);
+const StyledLogo = styled.img`
+  width: ${({ size }) => size || "20px"};
+  height: ${({ size }) => size || "20px"};
 `;

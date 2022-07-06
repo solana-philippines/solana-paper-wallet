@@ -6,6 +6,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import Label from "../components/Label";
 
+import { getPrintable, getPrintble } from "../modules/utils";
 import { paperStore } from "../modules/paper";
 import { useWallet } from "../components/WalletContext";
 import { useError } from "../components/ErrorContext";
@@ -19,8 +20,16 @@ export default function Airdrop() {
   const confirmCodeInputRef = useRef(null);
 
   const store = async () => {
+    if (
+      codeInputRef.current.value.length === 0 ||
+      confirmCodeInputRef.current.value.length === 0
+    ) {
+      setErrorMessage("Input your password");
+      return;
+    }
+
     if (codeInputRef.current.value !== confirmCodeInputRef.current.value) {
-      setErrorMessage("Passwords not the same");
+      setErrorMessage("Passwords do not match");
       return;
     }
 
@@ -32,6 +41,13 @@ export default function Airdrop() {
         connection,
         wallet,
         codeInputRef.current.value
+      );
+
+      // generate pdf
+      getPrintable(
+        signature,
+        codeInputRef.current.value,
+        wallet.publicKey.toString()
       );
 
       setLoading(false);

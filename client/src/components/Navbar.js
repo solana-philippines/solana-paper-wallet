@@ -18,7 +18,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!mounted) {
-      // connect();
+      connect();
       mounted = true; // prevent double connection
     }
   }, []);
@@ -31,7 +31,7 @@ export default function Navbar() {
   return (
     <>
       <StyledNav>
-        <Logo size="30px" />
+        <Logo size="60px" />
         <Link to="/">Home</Link>
         <Link to="/airdrop">Airdrop</Link>
         <Link to="/store">Store</Link>
@@ -45,7 +45,7 @@ export default function Navbar() {
           <StyledAddress>
             {wallet.publicKey.toString().slice(0, 5) +
               "..." +
-              wallet.publicKey.toString().slice(-6, -1)}
+              wallet.publicKey.toString().slice(-6)}
           </StyledAddress>
         )}
       </StyledNav>
@@ -71,7 +71,7 @@ export default function Navbar() {
         {displayMobileNav && (
           <div id="mobile-nav-links">
             <aside id="left">
-              <Logo size="20px" />
+              <Logo size="40px" />
               <h2>Paper Wallet</h2>
             </aside>
             <aside id="right">
