@@ -42,9 +42,19 @@ Keep your Solana in your physical wallet.
 
 WIP
 
+## Special Thanks @cblanquera
+
+<a href="https://github.com/cblanquera">@cblanquera</a> for the paper wallet idea. He implemented one as well for Ethereum with ERC20 tokens.
+
+## Wareneutron Developers
+
+For hosting, teamwork, and feedback.
+
+<a href="https://wareneutron.com"><img width="100px" src="./client/public/assets/wnd.png" alt="WND Logo"></a>
+
 ## Contribution
 
-Thank you for your interest in contributing to Anchor! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) to learn how.
+Thank you for your interest in contributing to Paper! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) to learn how.
 
 ## Much love to these people
 <div align="left">
