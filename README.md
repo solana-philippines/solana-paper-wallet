@@ -38,6 +38,10 @@ Keep your Solana in your physical wallet.
 - Get balance
 - Can be used for Solana vouchers
 
+## Deployment
+
+<a href="https://github.com/kquirapas/solana-paper-wallet">Solana Paper Wallet</a>
+
 ## License
 
 WIP
