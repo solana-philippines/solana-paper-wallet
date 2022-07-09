@@ -23,10 +23,6 @@ export default function Footer() {
       <StyledCopyright>
         <p>&copy; Kristian Quirapas</p>
       </StyledCopyright>
-      <StyledWND>
-        <img src="/assets/wnd.png" alt="WND Logo" />
-        <a href="https://wareneutron.com">Wareneutron Devs</a>
-      </StyledWND>
     </StyledFooter>
   );
 }
@@ -95,27 +91,5 @@ const StyledCopyright = styled.div`
 
   @media only screen and (max-width: 900px) {
     text-align: center;
-  }
-`;
-
-const StyledWND = styled.div`
-  color: ${colors.GREY};
-  text-align: center;
-  width: 100%;
-  img {
-    width: 100px;
-  }
-
-  a {
-    margin: 1em 0;
-    display: block;
-    width: 100%;
-    text-decoration: none;
-    font-family: Lato Bold;
-    font-size: 1.2em;
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 `;

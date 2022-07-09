@@ -21,7 +21,7 @@ Keep your Solana in your physical wallet.
 
 ## Deployment
 
-<a href="https://github.com/kquirapas/solana-paper-wallet">Solana Paper Wallet</a>
+<a href="https://solana-paper-wallet.vercel.app/">Solana Paper Wallet</a>
 
 ## Demo Video
 
@@ -34,12 +34,6 @@ WIP
 ## Special Thanks @cblanquera
 
 <a href="https://github.com/cblanquera">@cblanquera</a> for the paper wallet idea. He implemented one as well for Ethereum with ERC20 tokens.
-
-## Wareneutron Developers
-
-For hosting, teamwork, and feedback.
-
-<a href="https://wareneutron.com"><img width="100px" src="./client/public/assets/wnd.png" alt="WND Logo"></a>
 
 ## Contribution
 
