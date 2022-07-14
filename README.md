@@ -5,10 +5,9 @@
 		<strong>Solana Paper Wallet</strong>
 	</p>
 	<p>
-		<img src="https://img.shields.io/github/issues/kquirapas/solana-paper-wallet?style=for-the-badge" alt="Issues">
-		<img src="https://img.shields.io/twitter/follow/k_quirapas?color=%2300acee&style=for-the-badge" alt="Twitter">
-		<img src="https://img.shields.io/github/commit-activity/w/kquirapas/solana-paper-wallet?style=for-the-badge" alt="Commit Activity">
-		<img src="https://img.shields.io/github/license/kquirapas/solana-paper-wallet?style=for-the-badge" alt="License">
+		<img src="https://img.shields.io/github/issues/solana-philippines/solana-paper-wallet?style=for-the-badge" alt="Issues">
+		<img src="https://img.shields.io/github/commit-activity/w/solana-philippines/solana-paper-wallet?style=for-the-badge" alt="Commit Activity">
+		<img src="https://img.shields.io/github/license/solana-philippines/solana-paper-wallet?style=for-the-badge" alt="License">
 	</p>
 </div>
 
@@ -41,7 +40,7 @@ Thank you for your interest in contributing to Paper! Please see [CONTRIBUTING.m
 
 ## Much love to these people
 <div align="left">
-<a href="https://github.com/kquirapas/solana-paper-wallet/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=kquirapas/solana-paper-wallet" />
+<a href="https://github.com/solana-philippines/solana-paper-wallet/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=solana-philippines/solana-paper-wallet" />
 </a>
 </div>
